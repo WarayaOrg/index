@@ -1,0 +1,684 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="WARAYA – Waray-Waray Youth Advocates: empowering young voices in Eastern Visayas through culture, action, and news." />
+  <title>WARAYA · Youth advocates</title>
+  <!-- ========== STYLE OVERRIDES (modern purple/blue theme) ========== -->
+  <style>
+    /* ----- CSS reset / base (complements normalize) ----- */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Lora', serif;
+      background: #f8faff;
+      color: #1e1e3f;
+      line-height: 1.5;
+    }
+
+    /* ----- color palette : purple + light blue ----- */
+    :root {
+      --primary-deep: #4a1d6d;      /* deep purple */
+      --primary-bright: #7d3ac1;    /* vibrant purple */
+      --accent-light: #90d7ff;      /* light sky blue */
+      --accent-soft: #c7e9ff;       /* very soft blue */
+      --bg-light: #f0f3fd;
+      --text-dark: #18153a;
+      --text-soft: #3a3366;
+      --card-white: #ffffff;
+      --shadow: 0 18px 35px -12px rgba(55, 30, 90, 0.25);
+      --shadow-hover: 0 25px 45px -12px rgba(85, 40, 130, 0.35);
+    }
+
+    /* ----- header / navigation (transparent, modern) ----- */
+    header {
+      background: rgba(255, 255, 255, 0.75);
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
+      box-shadow: 0 6px 20px rgba(0,0,0,0.02);
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      border-bottom: 2px solid rgba(125, 58, 193, 0.2);
+    }
+
+    nav {
+      max-width: 1400px;
+      margin: 0 auto;
+      padding: 0.8rem 2rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    /* logo as image (Home/Photos/logo.png) */
+    .logo-img {
+      height: 52px;
+      width: auto;
+      display: block;
+      transition: transform 0.2s;
+    }
+    .logo-img:hover {
+      transform: scale(1.02);
+    }
+
+    .links {
+      display: flex;
+      gap: 2.5rem;
+      list-style: none;
+    }
+    .links li a {
+      text-decoration: none;
+      font-weight: 600;
+      font-size: 1.2rem;
+      color: var(--primary-deep);
+      padding: 0.5rem 0;
+      position: relative;
+      transition: 0.2s;
+    }
+    .links li a::after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 0%;
+      height: 3px;
+      background: linear-gradient(90deg, var(--primary-bright), var(--accent-light));
+      transition: 0.3s;
+      border-radius: 4px;
+    }
+    .links li a:hover {
+      color: var(--primary-bright);
+    }
+    .links li a:hover::after {
+      width: 100%;
+    }
+
+    /* ----- video / audio theme (unmute on click) ----- */
+    .intro-video-container {
+      position: relative;
+      width: 100%;
+      max-height: 65vh;
+      overflow: hidden;
+      border-radius: 0 0 3rem 3rem;
+      box-shadow: var(--shadow);
+      margin-bottom: 1.5rem;
+    }
+
+    #intro-video {
+      width: 100%;
+      height: auto;
+      display: block;
+      object-fit: cover;
+      max-height: 65vh;
+      background: #1a1035; /* fallback */
+    }
+
+    @keyframes gentle-pulse {
+      0% { opacity: 0.7; }
+      50% { opacity: 1; background: rgba(125, 58, 193, 0.8); }
+      100% { opacity: 0.7; }
+    }
+
+    /* ----- extra image below video (waraya.jpg) ----- */
+    .waraya-brand-image {
+      max-width: 1200px;
+      margin: 1rem auto 2rem;
+      padding: 0 2rem;
+    }
+    .waraya-brand-image img {
+      width: 100%;
+      border-radius: 32px;
+      box-shadow: var(--shadow);
+      border: 3px solid white;
+      transition: 0.3s;
+      display: block;
+    }
+    .waraya-brand-image img:hover {
+      box-shadow: var(--shadow-hover);
+    }
+
+    /* ----- main sections (modern cards, purple/blue) ----- */
+    .main {
+      background: linear-gradient(135deg, #e2dcff 0%, #d4f0ff 100%);
+      border-radius: 3rem 3rem 2rem 2rem;
+      margin: 2rem 2rem 1rem;
+      padding: 3.5rem 3rem;
+      box-shadow: inset 0 2px 12px rgba(255,255,255,0.7), var(--shadow);
+    }
+
+    .Home-entry h2 {
+      font-size: 3.5rem;
+      font-weight: 700;
+      color: var(--primary-deep);
+    }
+    .Home-entry h2 span {
+      background: linear-gradient(130deg, #7d3ac1, #58b5ff);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+    .Home-entry p {
+      font-size: 1.5rem;
+      max-width: 700px;
+      margin: 1.5rem 0;
+      color: #2d2452;
+      font-weight: 500;
+    }
+    .Home-entry a {
+      display: inline-block;
+      background: var(--primary-deep);
+      color: white;
+      padding: 0.9rem 2.8rem;
+      border-radius: 60px;
+      text-decoration: none;
+      font-weight: 600;
+      box-shadow: 0 12px 20px -14px #4a1d6d;
+      transition: 0.2s;
+      border: 1px solid rgba(255,255,255,0.3);
+      backdrop-filter: blur(4px);
+    }
+    .Home-entry a:hover {
+      background: #5f2b94;
+      transform: translateY(-5px);
+      box-shadow: 0 25px 30px -14px #602d9c;
+    }
+
+    /* latest & cards */
+    .latest, .focus, .info {
+      max-width: 1400px;
+      margin: 3rem auto;
+      padding: 0 2rem;
+    }
+
+    h2 {
+      font-size: 2.5rem;
+      color: var(--primary-deep);
+      border-left: 12px solid var(--accent-light);
+      padding-left: 1.8rem;
+      margin-bottom: 2rem;
+    }
+
+    .container, .containerr {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 2rem;
+    }
+
+    .card, .cards {
+      background: var(--card-white);
+      border-radius: 2rem;
+      overflow: hidden;
+      box-shadow: var(--shadow);
+      transition: all 0.25s ease;
+      border: 1px solid rgba(144, 215, 255, 0.4);
+    }
+    .card:hover, .cards:hover {
+      transform: translateY(-12px);
+      box-shadow: var(--shadow-hover);
+    }
+    .card img, .cards img {
+      width: 100%;
+      height: 210px;
+      object-fit: cover;
+      border-bottom: 4px solid var(--accent-light);
+    }
+    .card-content, .cards-content {
+      padding: 1.6rem 1.4rem 2rem;
+    }
+    .card-content h1, .cards-content h3 {
+      font-size: 1.6rem;
+      color: var(--primary-bright);
+      margin-bottom: 0.6rem;
+    }
+    .card-content p, .cards-content p {
+      color: var(--text-soft);
+      font-weight: 500;
+    }
+
+    /* Most viewed cards (anchor styling) */
+    .containerr a {
+      text-decoration: none;
+      color: inherit;
+    }
+
+    /* info & sidebar */
+    .info {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 3rem;
+      margin-top: 4rem;
+    }
+    .main-info {
+      flex: 2;
+      min-width: 300px;
+    }
+    .sidbar {
+      flex: 1;
+      min-width: 250px;
+    }
+
+    .p {
+      background: white;
+      border-radius: 2rem;
+      margin-bottom: 2rem;
+      display: flex;
+      flex-direction: column;
+      box-shadow: var(--shadow);
+      transition: 0.2s;
+      border: 1px solid #e6d9ff;
+    }
+    .p:hover {
+      box-shadow: var(--shadow-hover);
+    }
+    .p img {
+      width: 100%;
+      height: 170px;
+      object-fit: cover;
+      border-radius: 2rem 2rem 0 0;
+    }
+    .post-content {
+      padding: 1.5rem;
+    }
+    .post-content h3 {
+      color: var(--primary-deep);
+      margin-bottom: 0.3rem;
+    }
+
+    .section {
+      background: white;
+      border-radius: 2rem;
+      padding: 2rem 1.8rem;
+      margin-bottom: 2rem;
+      box-shadow: var(--shadow);
+    }
+    .section-title, .title {
+      font-size: 1.8rem;
+      border-bottom: 4px solid var(--accent-light);
+      padding-bottom: 0.6rem;
+      margin-bottom: 1.5rem;
+    }
+    .text-input {
+      width: 100%;
+      padding: 0.9rem 1.2rem;
+      border: 1px solid #c7b3ff;
+      border-radius: 48px;
+      font-size: 1rem;
+      background: #fafaff;
+    }
+    .topics ul {
+      list-style: none;
+    }
+    .topics li a {
+      display: block;
+      padding: 0.6rem 0.8rem;
+      margin: 0.3rem 0;
+      background: #f0eaff;
+      border-radius: 30px;
+      text-decoration: none;
+      color: var(--primary-deep);
+      font-weight: 500;
+      transition: 0.1s;
+    }
+    .topics li a:hover {
+      background: var(--accent-light);
+      color: #2a1b4a;
+      transform: translateX(8px);
+    }
+
+    /* ----- FOOTER (modern purple) ----- */
+    .footer {
+      background: linear-gradient(145deg, #2b1542, #1e283f);
+      color: #f0e6ff;
+      border-radius: 4rem 4rem 0 0;
+      margin-top: 4rem;
+      padding: 3rem 2rem 1rem;
+    }
+    .footer .container {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 3rem;
+      max-width: 1300px;
+      margin: 0 auto;
+    }
+    .footer .box h3 {
+      color: var(--accent-light);
+      font-size: 2rem;
+      margin-bottom: 1rem;
+    }
+    .social {
+      display: flex;
+      gap: 1.2rem;
+      list-style: none;
+      margin: 1.5rem 0;
+    }
+    .social a {
+      background: rgba(255,255,255,0.1);
+      width: 44px;
+      height: 44px;
+      border-radius: 60px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: white;
+      font-size: 1.5rem;
+      transition: 0.2s;
+    }
+    .social a:hover {
+      background: var(--accent-light);
+      color: #1e1e3f;
+    }
+    .names li {
+      list-style: none;
+      margin: 0.6rem 0;
+      font-weight: 400;
+      opacity: 0.9;
+    }
+    .links li a {
+      color: #dbc9ff;
+      text-decoration: none;
+    }
+    .line {
+      display: flex;
+      gap: 0.8rem;
+      margin-bottom: 1.4rem;
+      align-items: center;
+    }
+    .copyright {
+      text-align: center;
+      padding: 2rem 0 0;
+      border-top: 1px solid #5c4699;
+      margin-top: 2rem;
+      font-size: 1.1rem;
+    }
+    .copyright a {
+      color: white;
+      text-decoration: none;
+      font-weight: 600;
+    }
+
+    /* responsive touches */
+    @media (max-width: 750px) {
+      nav { flex-direction: column; gap: 0.8rem; }
+      .Home-entry h2 { font-size: 2.4rem; }
+      .main { padding: 2rem 1.5rem; margin: 1rem; }
+    }
+
+.intro-video-container {
+  position: relative;
+  width: 100%;
+  height: 100vh;
+  overflow: hidden;
+}
+
+.intro-video-container video {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.mute-btn {
+  position: absolute;
+  bottom: 20px;
+  right: 20px;
+  background: rgba(0,0,0,0.6);
+  color: #fff;
+  border: none;
+  font-size: 22px;
+  padding: 10px 14px;
+  border-radius: 50%;
+  cursor: pointer;
+  transition: 0.3s ease;
+}
+
+.mute-btn:hover {
+  background: rgba(0,0,0,0.8);
+  transform: scale(1.1);
+}
+
+.tap-to-unmute {
+  position: absolute;
+  bottom: 80px;
+  right: 20px;
+  background: rgba(0,0,0,0.6);
+  color: white;
+  padding: 8px 14px;
+  border-radius: 20px;
+  font-size: 14px;
+  transition: opacity 0.4s ease;
+}
+  </style>
+
+  <!-- External stylesheets (preserved) -->
+  <link rel="stylesheet" href="../CSS/normalize.css" />
+  <link rel="stylesheet" href="../CSS/all.min.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500;1,600;1,700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" />
+  <link rel="shortcut icon" type="x-icon" href="https://upload.wikimedia.org/wikipedia/commons/thumb/1/1a/V_logo.png/480px-V_logo.png" />
+</head>
+<body>
+  <header>
+    <nav>
+      <!-- IMAGE LOGO (Home/Photos/logo.png) -->
+      <a href="index.html" class="logo">
+        <img src="Home/Photos/logo.png" alt="WARAYA logo" class="logo-img" onerror="this.onerror=null; this.src='https://via.placeholder.com/150x52/4a1d6d/ffffff?text=WARAYA';">
+      </a>
+      <ul class="links">
+        <li><a href="index.html" class="lii">Home</a></li>
+        <li><a href="activities.html" class="lii">Activities</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <div class="body">
+    <!-- intro video with audio unmute on click (sync audio) -->
+<div class="intro-video-container">
+  <video id="intro-video" autoplay muted loop playsinline>
+    <source src="Home/Video/sexkwela.mp4" type="video/mp4" />
+    Your browser doesn’t support video element
+  </video>
+
+  <!-- Mute Toggle Button -->
+  <button id="muteToggle" class="mute-btn">🔇</button>
+
+  <div class="tap-to-unmute" id="tapToUnmute">
+  </div>
+</div>
+
+    <!-- image from Home/Photos/waraya.jpg (placed below video) -->
+    <div class="waraya-brand-image">
+      <img src="Home/Photos/waraya.jpg" alt="Waray-Waray youth advocates" onerror="this.onerror=null; this.src='https://via.placeholder.com/1200x400/7d3ac1/ffffff?text=WARAYA+ADVOCATES';">
+    </div>
+
+    <!-- Main entry -->
+    <section class="main">
+      <div class="Home-entry">
+        <h2>Empower <span>Waray-Waray</span> Youth</h2>
+        <p>Envisions a society that understands, respects, and cares the rights of Young people.</p>
+        <a href="about.html">See more</a>
+      </div>
+    </section>
+
+    <!-- Latest section (cards replaced with youth-oriented content) -->
+    <section class="latest" id="go-to-news">
+      <h2>Recent Activities</h2>
+      <div class="container">
+        <div class="card">
+          <img src="assets/details/sexkwela.jpg" alt="youth leadership">
+          <div class="card-content">
+            <h1>𝗣𝗿𝗼𝗷𝗲𝗰𝘁 𝗦𝗘𝗫𝗸𝘄𝗲𝗹𝗮: 𝗦𝗰𝗵𝗼𝗼𝗹 𝗖𝗮𝗿𝗮𝘃𝗮𝗻 𝗔𝘄𝗮𝗿𝗲𝗻𝗲𝘀𝘀 𝗖𝗮𝗺𝗽𝗮𝗶𝗴𝗻 𝗮𝘁 𝗦𝗦𝗨</h1>
+            <p>Project SEXkwela at Samar State University empowered students through open discussions on adolescent sexual health, teenage pregnancy, and HIV & AIDS, promoting informed and responsible decision-making.</p>
+          </div>
+        </div>
+        <div class="card">
+          <img src="assets/details/runationship.jpg" alt="cultural heritage">
+          <div class="card-content">
+            <h1>𝟮𝟬𝟮𝟲 𝗥𝗨𝗡𝗮𝘁𝗶𝗼𝗻𝘀𝗵𝗶𝗽 𝗖𝗼𝗺𝗺𝘂𝗻𝗶𝘁𝘆 𝗙𝘂𝗻 𝗥𝘂𝗻 & 𝗖𝗼𝗻𝗰𝗲𝗿𝘁</h1>
+            <p>WARAYA partnered with the 2026 RUNationship Community Fun Run & Concert on Valentine’s Day to promote fitness, music, and youth advocacy while raising awareness about teenage pregnancy in Catbalogan.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Most viewed (purple/blue cards)
+    <main class="focus">
+      <h2>Gidam-an · most viewed</h2>
+      <div class="containerr">
+        <a href="../../Politics/HTML/Sherine-Abu-Aqla.html" target="_blank">
+          <div class="cards">
+            <img src="https://www.thetimes.co.uk/imageserver/image/%2Fmethode%2Ftimes%2Fprod%2Fweb%2Fbin%2F4e40d2ea-2d3d-11ed-9b12-7a2e56f7aeb6.jpg?crop=2382%2C1340%2C20%2C454&resize=360" alt="indigenous rights" />
+            <div class="cards-content">
+              <h3>Indigenous youth</h3>
+              <p>How Waray youth protect ancestral lands</p>
+            </div>
+          </div>
+        </a>
+        <a href="../../Technology/HTML/4.html" target="_blank">
+          <div class="cards">
+            <img src="https://i.guim.co.uk/img/media/adcd9226ea26f8139ca0f17a4504ca49c17092ad/0_0_6255_3757/master/6255.jpg?width=620&dpr=2&s=none" alt="digital future" style="width:100%; height:200px; object-fit:cover;" />
+            <div class="cards-content">
+              <h3>Waray digital archive</h3>
+              <p>Youth-led project preserves stories online</p>
+            </div>
+          </div>
+        </a>
+        <a href="../../Sports/HTML/header 3.html" target="_blank">
+          <div class="cards">
+            <img src="https://media.cnn.com/api/v1/images/stellar/prod/231202112633-lionel-messi-world-cup-2022-file.jpg?c=16x9&q=h_438,w_780,c_fill" alt="sports" style="width:100%; height:200px; object-fit:cover;" />
+            <div class="cards-content">
+              <h3>Waray warrior athlete</h3>
+              <p>From Samar to national boxing podium</p>
+            </div>
+          </div>
+        </a>
+      </div>
+    </main> -->
+
+    <!-- info + sidebar -->
+    <div class="info clear">
+      <!-- <div class="main-info">
+        <h2 class="post">Recent Posts</h2>
+        <a href="../../Politics/HTML/childrens.html" target="_blank">
+          <div class="p">
+            <img src="../../Politics/Photos/378924.jpg" alt="youth in community" />
+            <div class="post-content">
+              <h3>Youth peace summit</h3>
+              <p>100 Waray delegates gather for interfaith dialogue.</p>
+            </div>
+          </div>
+        </a>
+        <a href="../../Politics/HTML/Are they terrorists.html" target="_blank">
+          <div class="p">
+            <img src="../../Politics/Photos/GettyImages-1244273756.jpg" alt="activism" />
+            <div class="post-content">
+              <h3>Advocacy vs disinformation</h3>
+              <p>Young fact-checkers fight fake news in Waray provinces.</p>
+            </div>
+          </div>
+        </a>
+        <a href="../../Sports/HTML/header 1.html" target="_blank">
+          <div class="p">
+            <img src="https://media.cnn.com/api/v1/images/stellar/prod/231212083056-01-turkish-super-lig-incident-121123.jpg?c=16x9&q=h_438,w_780,c_fill" alt="referee" />
+            <div class="post-content">
+              <h3>Fair play campaign</h3>
+              <p>Local youth push for ethics in school sports.</p>
+            </div>
+          </div>
+        </a>
+      </div> -->
+
+      <!-- sidebar -->
+      <div class="sidbar">
+        <!-- <div class="section search">
+          <h2 class="title">Bilnga · search</h2>
+          <form action="#" method="post">
+            <input type="text" name="search-term" class="text-input" placeholder="type keyword..." />
+          </form>
+        </div> -->
+        <!-- <div class="section topics">
+          <h2 class="section-title">Mga topiko · topics</h2>
+          <ul>
+            <li><a href="#">kultura (culture)</a></li>
+            <li><a href="#">advocacy</a></li>
+            <li><a href="#">kabatan-onan (youth)</a></li>
+            <li><a href="#">kalikupan (environment)</a></li>
+            <li><a href="#">creative writing</a></li>
+            <li><a href="#">waray quotes</a></li>
+          </ul>
+        </div> -->
+      </div>
+    </div>
+
+    <!-- FOOTER (same as home/activities) -->
+    <div class="footer">
+      <div class="container">
+        <div class="box">
+          <h3>Waray-Waray Youth Advocates Inc.</h3>
+          <ul class="social">
+            <li><a href="https://www.facebook.com/warayaofficial" class="facebook"><i class="fab fa-facebook-f"></i></a></li>
+            <li><a href="https://www.instagram.com/waraya.official/" class="instagram"><i class="fab fa-instagram"></i></a></li>
+          </ul>
+          <div class="text">
+            <ul class="names">
+              <!-- <li>Omar Ayman Gaber</li>
+              <li>Fayez Mohamed Meabed</li>
+              <li>Mahmoud Mustafa Ahmed</li>
+              <li>Eslam Gamal Ali</li>
+              <li>Mohamed Ashri Mustafa</li>
+              <li>El-Adham Nagy Khazim</li>
+            </ul> -->
+          </div>
+        </div>
+        <!-- <div class="box">
+          <ul class="links">
+            <li><a href="#">About WARAYA</a></li>
+            <li><a href="#">Join youth hub</a></li>
+            <li><a href="#">Partner with us</a></li>
+            <li><a href="#">Code of conduct</a></li>
+            <li><a href="#">Contact</a></li>
+          </ul>
+        </div> -->
+        <div class="box">
+          <div class="line"><i class="fas fa-map-marker-alt fa-fw"></i><div class="team-info">Catbalogan City, Samar Eastern Visayas</div></div>
+          <!-- <div class="line"><i class="far fa-clock fa-fw"></i><div class="team-info">Youth hub open: 9:00 AM – 9:00 PM</div></div> -->
+          <div class="line"><i class="fas fa-phone-volume fa-fw"></i><div class="team-info"><span>0919 677 2075</span></div></div>
+        </div>
+      </div>
+      <p class="copyright"><a href="../../Team Photos/HTML/teams.html" target="_blank" style="color:white;">Ⓒ 2026 Waray-Waray Youth Advocates Inc.</a></p>
+    </div>
+  </div>
+
+<script>
+(function() {
+  const video = document.getElementById('intro-video');
+  const muteBtn = document.getElementById('muteToggle');
+  const hint = document.getElementById('tapToUnmute');
+
+  if (!video || !muteBtn) return;
+
+  // Toggle Mute Function
+  muteBtn.addEventListener('click', function(e) {
+    e.stopPropagation(); // prevent triggering other click events
+
+    video.muted = !video.muted;
+
+    if (video.muted) {
+      muteBtn.textContent = "🔇";
+      if (hint) hint.style.opacity = "1";
+    } else {
+      muteBtn.textContent = "🔊";
+      video.play().catch(err => console.log("Play failed:", err));
+      if (hint) hint.style.opacity = "0";
+    }
+  });
+})();
+</script>
+  <script src="../JS/main.js"></script>
+</body>
+</html>
