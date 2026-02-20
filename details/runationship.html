@@ -1,0 +1,500 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="WARAYA details: in-depth stories, advocacy deep-dives, and cultural articles from Waray-Waray youth advocates." />
+  <title>WARAYA · Article details</title>
+  <!-- ===== MODERN PURPLE/LIGHT BLUE THEME ===== -->
+  <style>
+    /* ----- RESET & BASE ----- */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Lora', serif;
+      background: #f8faff;
+      color: #1e1e3f;
+      line-height: 1.6;
+    }
+
+    :root {
+      --primary-deep: #4a1d6d;      /* deep purple */
+      --primary-bright: #7d3ac1;    /* vibrant purple */
+      --accent-light: #90d7ff;      /* light sky blue */
+      --accent-soft: #c7e9ff;       /* soft blue */
+      --bg-light: #f0f3fd;
+      --text-dark: #18153a;
+      --text-soft: #3a3366;
+      --card-white: #ffffff;
+      --shadow: 0 18px 35px -12px rgba(55, 30, 90, 0.25);
+      --shadow-hover: 0 25px 45px -12px rgba(85, 40, 130, 0.35);
+    }
+
+    /* ----- HEADER (matching home/activities) ----- */
+    header {
+      background: rgba(255, 255, 255, 0.75);
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
+      box-shadow: 0 6px 20px rgba(0,0,0,0.02);
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      border-bottom: 2px solid rgba(125, 58, 193, 0.2);
+    }
+
+    nav {
+      max-width: 1400px;
+      margin: 0 auto;
+      padding: 0.8rem 2rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+    }
+
+    .logo-img {
+      height: 52px;
+      width: auto;
+      display: block;
+      transition: transform 0.2s;
+    }
+    .logo-img:hover {
+      transform: scale(1.02);
+    }
+
+    .links {
+      display: flex;
+      gap: 2.5rem;
+      list-style: none;
+    }
+    .links li a {
+      text-decoration: none;
+      font-weight: 600;
+      font-size: 1.2rem;
+      color: var(--primary-deep);
+      padding: 0.5rem 0;
+      position: relative;
+      transition: 0.2s;
+    }
+    .links li a::after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 0%;
+      height: 3px;
+      background: linear-gradient(90deg, var(--primary-bright), var(--accent-light));
+      transition: 0.3s;
+      border-radius: 4px;
+    }
+    .links li a:hover {
+      color: var(--primary-bright);
+    }
+    .links li a:hover::after {
+      width: 100%;
+    }
+
+    /* ----- ARTICLE DETAIL PAGE LAYOUT (modern article) ----- */
+    .article-container {
+      max-width: 1300px;
+      margin: 2.5rem auto;
+      padding: 0 2rem;
+      display: grid;
+      grid-template-columns: 2.5fr 1fr;
+      gap: 2.5rem;
+    }
+
+    /* main article card */
+    .article-main {
+      background: var(--card-white);
+      border-radius: 2.5rem;
+      overflow: hidden;
+      box-shadow: var(--shadow);
+      border: 1px solid rgba(144, 215, 255, 0.3);
+      padding: 2.5rem;
+    }
+
+    .article-header {
+      margin-bottom: 2rem;
+    }
+
+    .article-header h1 {
+      font-size: 3rem;
+      font-weight: 700;
+      color: var(--primary-deep);
+      line-height: 1.2;
+      margin-bottom: 1rem;
+    }
+
+    .article-meta {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 2rem;
+      color: #5b4b7a;
+      font-weight: 500;
+      border-bottom: 2px solid var(--accent-soft);
+      padding-bottom: 1.2rem;
+      margin-bottom: 1.8rem;
+    }
+    .article-meta i {
+      color: var(--accent-light);
+      margin-right: 0.4rem;
+      width: 1.3rem;
+    }
+
+    .featured-image {
+      width: 100%;
+      max-height: 460px;
+      object-fit: cover;
+      border-radius: 2rem;
+      margin: 1.5rem 0 2rem;
+      box-shadow: var(--shadow);
+      border: 3px solid white;
+    }
+
+    .article-content {
+      color: var(--text-soft);
+      font-size: 1.15rem;
+    }
+
+    .article-content h2 {
+      font-size: 2rem;
+      color: var(--primary-bright);
+      margin: 2.2rem 0 1rem;
+      border-left: 8px solid var(--accent-light);
+      padding-left: 1.2rem;
+    }
+
+    .article-content h3 {
+      font-size: 1.6rem;
+      color: var(--primary-deep);
+      margin: 1.8rem 0 0.8rem;
+    }
+
+    .article-content p {
+      margin-bottom: 1.4rem;
+      line-height: 1.8;
+    }
+
+    .article-content blockquote {
+      background: linear-gradient(145deg, #f2eaff, #e9f4ff);
+      padding: 1.8rem 2.2rem;
+      border-radius: 2rem;
+      font-style: italic;
+      font-size: 1.25rem;
+      border-left: 10px solid var(--primary-bright);
+      margin: 2rem 0;
+      color: #2f2655;
+      box-shadow: inset 0 0 0 1px rgba(255,255,255,0.7);
+    }
+
+    .article-content ul, .article-content ol {
+      margin: 1.2rem 0 1.8rem 2rem;
+    }
+    .article-content li {
+      margin-bottom: 0.5rem;
+    }
+
+    /* sidebar (simplified: only "You might also like" remains) */
+    .article-sidebar {
+      display: flex;
+      flex-direction: column;
+      gap: 2rem;
+    }
+
+    .sidebar-card {
+      background: var(--card-white);
+      border-radius: 2rem;
+      padding: 2rem 1.8rem;
+      box-shadow: var(--shadow);
+      border: 1px solid rgba(144, 215, 255, 0.4);
+    }
+
+    .sidebar-card h3 {
+      font-size: 1.8rem;
+      color: var(--primary-deep);
+      border-bottom: 4px solid var(--accent-light);
+      padding-bottom: 0.8rem;
+      margin-bottom: 1.5rem;
+    }
+
+    .related-article {
+      display: flex;
+      gap: 1rem;
+      margin-bottom: 1.5rem;
+      align-items: center;
+    }
+    .related-article img {
+      width: 80px;
+      height: 80px;
+      border-radius: 1.2rem;
+      object-fit: cover;
+      border: 3px solid var(--accent-light);
+    }
+    .related-article a {
+      text-decoration: none;
+      font-weight: 600;
+      color: var(--text-dark);
+      font-size: 1.1rem;
+      line-height: 1.4;
+    }
+    .related-article a:hover {
+      color: var(--primary-bright);
+    }
+
+    .btn-share {
+      display: inline-block;
+      background: var(--primary-deep);
+      color: white;
+      padding: 0.7rem 2rem;
+      border-radius: 40px;
+      font-weight: 600;
+      text-decoration: none;
+      margin-top: 1rem;
+      border: 1px solid rgba(255,255,255,0.2);
+      transition: 0.2s;
+    }
+    .btn-share i {
+      margin-right: 0.5rem;
+    }
+    .btn-share:hover {
+      background: #5f2b94;
+      transform: translateY(-3px);
+      box-shadow: 0 15px 20px -12px #602d9c;
+    }
+
+    /* ----- FOOTER (identical to home) ----- */
+    .footer {
+      background: linear-gradient(145deg, #2b1542, #1e283f);
+      color: #f0e6ff;
+      border-radius: 4rem 4rem 0 0;
+      margin-top: 4rem;
+      padding: 3rem 2rem 1rem;
+    }
+    .footer .container {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 3rem;
+      max-width: 1300px;
+      margin: 0 auto;
+    }
+    .footer .box h3 {
+      color: var(--accent-light);
+      font-size: 2rem;
+      margin-bottom: 1rem;
+    }
+    .social {
+      display: flex;
+      gap: 1.2rem;
+      list-style: none;
+      margin: 1.5rem 0;
+    }
+    .social a {
+      background: rgba(255,255,255,0.1);
+      width: 44px;
+      height: 44px;
+      border-radius: 60px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: white;
+      font-size: 1.5rem;
+      transition: 0.2s;
+    }
+    .social a:hover {
+      background: var(--accent-light);
+      color: #1e1e3f;
+    }
+    .names li {
+      list-style: none;
+      margin: 0.6rem 0;
+      opacity: 0.9;
+    }
+    .footer .links li a {
+      color: #dbc9ff;
+      text-decoration: none;
+      display: block;
+      padding: 0.3rem 0;
+    }
+    .line {
+      display: flex;
+      gap: 0.8rem;
+      margin-bottom: 1.4rem;
+      align-items: center;
+    }
+    .copyright {
+      text-align: center;
+      padding: 2rem 0 0;
+      border-top: 1px solid #5c4699;
+      margin-top: 2rem;
+      font-size: 1.1rem;
+    }
+    .copyright a {
+      color: white;
+      text-decoration: none;
+      font-weight: 600;
+    }
+
+    /* responsive */
+    @media (max-width: 850px) {
+      .article-container {
+        grid-template-columns: 1fr;
+      }
+      nav { flex-direction: column; gap: 0.8rem; }
+      .article-header h1 { font-size: 2.4rem; }
+    }
+  </style>
+
+  <!-- external assets -->
+  <link rel="stylesheet" href="../CSS/normalize.css" />
+  <link rel="stylesheet" href="../CSS/all.min.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500;1,600;1,700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" />
+  <link rel="shortcut icon" type="x-icon" href="https://upload.wikimedia.org/wikipedia/commons/thumb/1/1a/V_logo.png/480px-V_logo.png" />
+</head>
+<body>
+  <header>
+    <nav>
+      <a href="index.html" class="logo">
+        <!-- logo from Home/Photos/logo.png (fallback included) -->
+        <img src="../assets/logo.png" alt="WARAYA logo" class="logo-img" onerror="this.onerror=null; this.src='https://via.placeholder.com/150x52/4a1d6d/ffffff?text=WARAYA';">
+      </a>
+      <ul class="links">
+        <li><a href="index.html" class="lii">Home</a></li>
+        <li><a href="activities.html" class="lii">Activities</a></li>
+        <li><a href="advocacies.html" class="lii">Advocacies</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <!-- article detail section (main + sidebar) -->
+  <div class="article-container">
+    <!-- MAIN ARTICLE (feature story with images from Home/Photos/ ) -->
+    <article class="article-main">
+      <div class="article-header">
+        <h1>𝗣𝗿𝗼𝗷𝗲𝗰𝘁 𝗦𝗘𝗫𝗸𝘄𝗲𝗹𝗮: 𝗦𝗰𝗵𝗼𝗼𝗹 𝗖𝗮𝗿𝗮𝘃𝗮𝗻 𝗔𝘄𝗮𝗿𝗲𝗻𝗲𝘀𝘀 𝗖𝗮𝗺𝗽𝗮𝗶𝗴𝗻 𝗮𝘁 𝗦𝗦𝗨</h1>
+        <div class="article-meta">
+          <span><i class="fas fa-calendar-alt"></i> February 15, 2026</span>
+        </div>
+        <!-- featured image from Home/Photos/ (using gaza.webp as atmospheric folklore image) -->
+        <img class="featured-image" src="../assets/details/runationship.jpg" alt="Waray landscape and folklore" onerror="this.src='https://via.placeholder.com/1200x460/7d3ac1/ffffff?text=Waray+Folklore';">
+      </div>
+
+      <div class="article-content">
+        <p>Before the Spaniards set foot on the island of Samar, the Waray already had a rich tapestry of stories—epic poems whispered by babaylan, tales of the <em>tigbanua</em> (giants) who carved the mountains, and the <em>dalagang saging</em> who haunted banana groves. For young Waray today, these stories are not just myths; they are keys to understanding our relationship with nature, ancestors, and identity.</p>
+
+        <!-- inserted image: 2126721.jpg from Politics/Photos (but we treat as Home/Photos variant) -->
+        <img src="../../Politics/Photos/2126721.jpg" alt="Elders storytelling" style="width:100%; border-radius:2rem; margin:2rem 0; box-shadow:var(--shadow);" onerror="this.style.display='none';">
+
+        <h2>The creation myth of Mount Huraw</h2>
+        <p>One of the most beloved legends tells of <strong>Huraw</strong>, a giant who once lived in what is now Samar. When he died, his body transformed into the mountain range—his head became the peak, his outstretched arms formed the hills, and his tears became the springs that nourish the lowlands. Even today, elder farmers leave a small offering of rice and coconut before planting, out of respect for Huraw’s spirit.</p>
+
+        <blockquote>“The mountain is not just soil and rock. It is our grandfather’s bones. You do not mine your own lolo.” — Elena Zabate, 72, oral historian from Basey</blockquote>
+
+        <!-- inserted image: 378924.jpg from Politics/Photos -->
+        <img src="../../Politics/Photos/378924.jpg" alt="Waray youth cultural workshop" style="width:100%; border-radius:2rem; margin:2rem 0; box-shadow:var(--shadow);" onerror="this.style.display='none';">
+
+        <h3>Asuang and the warning tales</h3>
+        <p>In Waray folklore, the <em>asuang</em> is not merely a monster but a moral compass. Stories of shape-shifters were told to keep children from wandering into the forest at dusk or stealing from neighbours. But the asuang also reflects deep anxieties about community betrayal—the creature is often described as a ordinary neighbour who transforms at night. Modern youth advocates have used these tales in awareness campaigns against online predators, drawing parallels: “The asuang can be anyone, even a friendly face online.”</p>
+
+        <h2>Reviving epics through spoken word</h2>
+        <p>Today, Waray youth are reclaiming folklore through <strong>modern retellings</strong>. In Tacloban, a group called “Sugid” organises storytelling slams where teens reinterpret the <em>siday</em> (epic poetry) with hip-hop beats. The ancient tale of <em>Labaw Donggon</em> becomes a metaphor for fighting modern-day giants—poverty, disinformation, climate apathy.</p>
+
+        <!-- inserted image: GettyImages-1244273756.jpg from Politics/Photos -->
+        <img src="../../Politics/Photos/GettyImages-1244273756.jpg" alt="Spoken word performance" style="width:100%; border-radius:2rem; margin:2rem 0; box-shadow:var(--shadow);" onerror="this.style.display='none';">
+
+        <p>The movement is gaining traction: in 2024, a Waray-language graphic novel <em>“Huraw: Anak han Dagat”</em> was funded via crowd-sourcing and distributed to 20 public schools. Its author, 22-year-old Kyla Jesper, says: “Folklore isn’t frozen. It evolves every time a young person tells it.”</p>
+
+        <h3>Preserving the language</h3>
+        <p>At the heart of every story is the Waray language itself—melodic, direct, full of idioms that defy direct translation. The phrase <em>“Matadong nga adlaw”</em> (upright day) means more than good weather; it signifies moral clarity. Through folklore workshops, the youth organisation WARAYA teaches children not just the plots, but the <strong>words their grandparents used</strong>. “If we lose the language, the spirits become mute,” as one elder put it.</p>
+
+        <p>This article is part of our cultural preservation series, celebrating Waray heritage through a youth lens.</p>
+      </div>
+
+      <!-- simple share / reaction (optional) -->
+      <div style="margin-top: 2.5rem; border-top: 2px dashed var(--accent-soft); padding-top: 1.8rem; display: flex; gap: 1.5rem; align-items: center;">
+        <span style="font-weight: 600; color: var(--primary-deep);">Share this story:</span>
+        <a href="#" style="color: #3b5998; font-size: 1.7rem;"><i class="fab fa-facebook"></i></a>
+        <a href="#" style="color: #1DA1F2; font-size: 1.7rem;"><i class="fab fa-twitter"></i></a>
+        <a href="#" style="color: #25D366; font-size: 1.7rem;"><i class="fab fa-whatsapp"></i></a>
+      </div>
+    </article>
+
+    <!-- RIGHT SIDEBAR (only "You might also like" remains - Gamhanan series, topics, keep in touch removed) -->
+    <aside class="article-sidebar">
+      <!-- related articles (mini) - using images from Home/Photos where possible -->
+      <div class="sidebar-card">
+        <h3>You might also like</h3>
+
+        <div class="related-article">
+          <!-- using waraya.jpg from Photos -->
+          <img src="../Photos/waraya.jpg" alt="Waray youth" onerror="this.src='https://via.placeholder.com/80/7d3ac1/ffffff?text=story';">
+          <a href="#">The last Mamanwa elders: a photo essay</a>
+        </div>
+
+        <div class="related-article">
+          <!-- using logo.png as placeholder but replaced with another photo: gaza.webp already used, we can use 2126721.jpg (but better to vary) -->
+          <img src="../../Politics/Photos/2126721.jpg" alt="Cultural dance" onerror="this.src='https://via.placeholder.com/80/90d7ff/000?text=2';">
+          <a href="#">How binayle dances survived colonization</a>
+        </div>
+
+        <div class="related-article">
+          <!-- using 378924.jpg -->
+          <img src="../../Politics/Photos/378924.jpg" alt="Advocacy" onerror="this.src='https://via.placeholder.com/80/4a1d6d/ffffff?text=3';">
+          <a href="#">Youth vs. mining in Samar: a community wins</a>
+        </div>
+
+        <div class="related-article">
+          <!-- using GettyImages-1244273756.jpg -->
+          <img src="../../Politics/Photos/GettyImages-1244273756.jpg" alt="Storytelling" onerror="this.src='https://via.placeholder.com/80/7d3ac1/ffffff?text=4';">
+          <a href="#">Hinirang: young weavers revive abaca tradition</a>
+        </div>
+      </div>
+    </aside>
+  </div>
+
+  <!-- FOOTER (exactly as home/activities) -->
+  <div class="footer">
+    <div class="container">
+      <div class="box">
+        <h3>CS clowns · WARAYA</h3>
+        <ul class="social">
+          <li><a href="#" class="facebook"><i class="fab fa-facebook-f"></i></a></li>
+          <li><a href="#" class="twitter"><i class="fab fa-twitter"></i></a></li>
+          <li><a href="#" class="youtube"><i class="fab fa-youtube"></i></a></li>
+        </ul>
+        <div class="text">
+          <ul class="names">
+            <li>Omar Ayman Gaber</li>
+            <li>Fayez Mohamed Meabed</li>
+            <li>Mahmoud Mustafa Ahmed</li>
+            <li>Eslam Gamal Ali</li>
+            <li>Mohamed Ashri Mustafa</li>
+            <li>El-Adham Nagy Khazim</li>
+          </ul>
+        </div>
+      </div>
+      <div class="box">
+        <ul class="links">
+          <li><a href="#">About WARAYA</a></li>
+          <li><a href="#">Join youth hub</a></li>
+          <li><a href="#">Partner with us</a></li>
+          <li><a href="#">Code of conduct</a></li>
+          <li><a href="#">Contact</a></li>
+        </ul>
+      </div>
+      <div class="box">
+        <div class="line"><i class="fas fa-map-marker-alt fa-fw"></i><div class="team-info">Tacloban City, Leyte, Eastern Visayas</div></div>
+        <div class="line"><i class="far fa-clock fa-fw"></i><div class="team-info">Youth hub open: 9:00 AM – 9:00 PM</div></div>
+        <div class="line"><i class="fas fa-phone-volume fa-fw"></i><div class="team-info"><span>+63 123 456 789</span><br /><span>+63 987 654 321</span></div></div>
+      </div>
+    </div>
+          <p class="copyright"><a href="../../Team Photos/HTML/teams.html" target="_blank" style="color:white;">Ⓒ 2026 Waray-Waray Youth Advocates Inc.</a></p>
+  </div>
+</body>
+</html>
